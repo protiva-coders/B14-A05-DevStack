@@ -60,8 +60,8 @@ A parent component passes data to a child component using props. A child can sen
 
 ## Live Site
 
-Coming soon.
+https://b14-a05-dev-stack-67uu.vercel.app/
 
 ## GitHub Repository
 
-Coming soon.
+https://github.com/protiva-coders/B14-A05-DevStack
