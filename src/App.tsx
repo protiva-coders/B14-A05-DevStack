@@ -5,6 +5,8 @@ import Hero from './components/Hero'
 import Nav from './components/nav'
 import Technology from './components/technologies/technology';
 import type { Itechnology } from './types/TechnologyType';
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const technologyFetch = async ():Promise<Itechnology[]> => {
   const res = await fetch("/technologies.json");
@@ -26,6 +28,7 @@ function App() {
         <Technology technologiesPromise={technologiesPromise}/>
           
         </Suspense>
+        <ToastContainer />
       
     </>
   )
