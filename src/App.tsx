@@ -2,7 +2,7 @@
 import { Suspense } from 'react';
 import './App.css'
 import Hero from './components/Hero'
-import Nav from './components/nav'
+import Nav from './components/Nav'
 import Technology from './components/technologies/technology';
 import type { Itechnology } from './types/TechnologyType';
 import { ToastContainer } from "react-toastify";
