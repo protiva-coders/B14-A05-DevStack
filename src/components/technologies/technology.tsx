@@ -11,7 +11,22 @@ const Technology = ({ technologiesPromise }: TechnologyProps) => {
   const [stack, setStack] = useState<Itechnology[]>([]);
 
   const handleAddToStack = (technology: Itechnology) => {
+    const alreadyAdded = stack.some((item) => item.id === technology.id);
+
+    if (alreadyAdded) {
+      alert("This technology is already in your stack!");
+      return;
+    }
+
     setStack([...stack, technology]);
+  };
+
+  const handleRemove = (id: string) => {
+    setStack(stack.filter((item) => item.id !== id));
+  };
+
+  const handleRemoveAll = () => {
+    setStack([]);
   };
 
   return (
@@ -34,68 +49,79 @@ const Technology = ({ technologiesPromise }: TechnologyProps) => {
 
           {/* Technology Cards */}
           <div className="col-span-2 grid grid-cols-2 gap-6">
-            {technologies.map((technology) => (
-              <div
-                key={technology.id}
-                className="rounded-2xl border border-gray-200 bg-white p-5 shadow-sm"
-              >
+            {technologies.map((technology) => {
+              const isAdded = stack.some(
+                (item) => item.id === technology.id
+              );
 
-                {/* Icon + Badge */}
-                <div className="flex items-start justify-between">
-                  <div className="flex h-14 w-14 items-center justify-center rounded-xl bg-gray-50">
-                    <img
-                      src={technology.icon}
-                      alt={technology.name}
-                      className="h-10 w-10 object-contain"
-                    />
-                  </div>
+              return (
+                <div
+                  key={technology.id}
+                  className="rounded-2xl border border-gray-200 bg-white p-5 shadow-sm"
+                >
 
-                  <span className="rounded-full bg-orange-50 px-3 py-1 text-xs font-semibold text-orange-600">
-                    {technology.badge}
-                  </span>
-                </div>
+                  {/* Icon + Badge */}
+                  <div className="flex items-start justify-between">
+                    <div className="flex h-14 w-14 items-center justify-center rounded-xl bg-gray-50">
+                      <img
+                        src={technology.icon}
+                        alt={technology.name}
+                        className="h-10 w-10 object-contain"
+                      />
+                    </div>
 
-                {/* Name */}
-                <h3 className="mt-5 text-xl font-bold text-gray-900">
-                  {technology.name}
-                </h3>
-
-                {/* Description */}
-                <p className="mt-2 min-h-12 text-sm leading-6 text-gray-500">
-                  {technology.description}
-                </p>
-
-                {/* Category + Difficulty */}
-                <div className="mt-4 flex gap-2">
-                  <span className="rounded-full bg-violet-50 px-3 py-1 text-xs font-medium text-violet-600">
-                    {technology.category}
-                  </span>
-
-                  <span className="rounded-full bg-gray-100 px-3 py-1 text-xs font-medium text-gray-600">
-                    {technology.difficulty}
-                  </span>
-                </div>
-
-                {/* Rating + Button */}
-                <div className="mt-5 flex items-center justify-between border-t border-gray-100 pt-4">
-                  <div className="flex items-center gap-1">
-                    <span className="text-yellow-500">★</span>
-
-                    <span className="text-sm font-semibold text-gray-700">
-                      {technology.rating}
+                    <span className="rounded-full bg-orange-50 px-3 py-1 text-xs font-semibold text-orange-600">
+                      {technology.badge}
                     </span>
                   </div>
 
-                  <button
-                    onClick={() => handleAddToStack(technology)}
-                    className="rounded-full bg-gradient-to-r from-orange-500 via-pink-500 to-violet-600 px-5 py-2.5 text-sm font-semibold text-white"
-                  >
-                    Add to Stack
-                  </button>
-                </div>
+                  {/* Name */}
+                  <h3 className="mt-5 text-xl font-bold text-gray-900">
+                    {technology.name}
+                  </h3>
 
-              </div>
-            ))}
+                  {/* Description */}
+                  <p className="mt-2 min-h-12 text-sm leading-6 text-gray-500">
+                    {technology.description}
+                  </p>
+
+                  {/* Category + Difficulty */}
+                  <div className="mt-4 flex gap-2">
+                    <span className="rounded-full bg-violet-50 px-3 py-1 text-xs font-medium text-violet-600">
+                      {technology.category}
+                    </span>
+
+                    <span className="rounded-full bg-gray-100 px-3 py-1 text-xs font-medium text-gray-600">
+                      {technology.difficulty}
+                    </span>
+                  </div>
+
+                  {/* Rating + Button */}
+                  <div className="mt-5 flex items-center justify-between border-t border-gray-100 pt-4">
+                    <div className="flex items-center gap-1">
+                      <span className="text-yellow-500">★</span>
+
+                      <span className="text-sm font-semibold text-gray-700">
+                        {technology.rating}
+                      </span>
+                    </div>
+
+                    <button
+                      onClick={() => handleAddToStack(technology)}
+                      disabled={isAdded}
+                      className={`rounded-full px-5 py-2.5 text-sm font-semibold text-white ${
+                        isAdded
+                          ? "cursor-not-allowed bg-gray-400"
+                          : "bg-gradient-to-r from-orange-500 via-pink-500 to-violet-600"
+                      }`}
+                    >
+                      {isAdded ? "✓ Added to Stack" : "Add to Stack"}
+                    </button>
+                  </div>
+
+                </div>
+              );
+            })}
           </div>
 
           {/* Your Stack */}
@@ -126,31 +152,49 @@ const Technology = ({ technologiesPromise }: TechnologyProps) => {
                 </p>
               </div>
             ) : (
-              /* Selected Technologies */
-              <div className="mt-5 space-y-3">
-                {stack.map((technology) => (
-                  <div
-                    key={technology.id}
-                    className="flex items-center gap-3 rounded-xl border border-gray-100 p-3"
-                  >
-                    <img
-                      src={technology.icon}
-                      alt={technology.name}
-                      className="h-9 w-9 object-contain"
-                    />
+              <>
+                {/* Selected Technologies */}
+                <div className="mt-5 space-y-3">
+                  {stack.map((technology) => (
+                    <div
+                      key={technology.id}
+                      className="flex items-center gap-3 rounded-xl border border-gray-100 p-3"
+                    >
+                      <img
+                        src={technology.icon}
+                        alt={technology.name}
+                        className="h-9 w-9 object-contain"
+                      />
 
-                    <div>
-                      <h4 className="text-sm font-semibold text-gray-800">
-                        {technology.name}
-                      </h4>
+                      <div className="flex-1">
+                        <h4 className="text-sm font-semibold text-gray-800">
+                          {technology.name}
+                        </h4>
 
-                      <p className="text-xs text-gray-400">
-                        {technology.category}
-                      </p>
+                        <p className="text-xs text-gray-400">
+                          {technology.category}
+                        </p>
+                      </div>
+
+                      {/* Remove Button */}
+                      <button
+                        onClick={() => handleRemove(technology.id)}
+                        className="text-lg font-bold text-gray-400 hover:text-red-500"
+                      >
+                        ✕
+                      </button>
                     </div>
-                  </div>
-                ))}
-              </div>
+                  ))}
+                </div>
+
+                {/* Remove All */}
+                <button
+                  onClick={handleRemoveAll}
+                  className="mt-5 w-full rounded-full border border-red-200 px-4 py-2.5 text-sm font-semibold text-red-500 hover:bg-red-50"
+                >
+                  Remove All
+                </button>
+              </>
             )}
 
           </aside>
