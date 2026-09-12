@@ -9,9 +9,81 @@ const Technology = ({technologiesPromise}:TechnologyProps) => {
   const technologies = use(technologiesPromise);
   console.log(technologies);
     return (
-        <div>
-            
+         <section className="bg-gray-50 py-12">
+      <div className="mx-auto max-w-6xl px-6">
+
+        <div className="mb-8">
+          <h2 className="text-2xl font-bold text-gray-900">
+            Explore Technologies
+          </h2>
+
+          <p className="mt-2 text-gray-500">
+            Choose the right technologies for your development stack.
+          </p>
         </div>
+
+        <div className="grid grid-cols-3 gap-6">
+          {technologies.map((technology) => (
+            <div
+              key={technology.id}
+              className="rounded-2xl border border-gray-200 bg-white p-5 shadow-sm"
+            >
+              {/* Icon + Badge */}
+              <div className="flex items-start justify-between">
+                <div className="flex h-14 w-14 items-center justify-center rounded-xl bg-gray-50">
+                  <img
+                    src={technology.icon}
+                    alt={technology.name}
+                    className="h-10 w-10 object-contain"
+                  />
+                </div>
+
+                <span className="rounded-full bg-orange-50 px-3 py-1 text-xs font-semibold text-orange-600">
+                  {technology.badge}
+                </span>
+              </div>
+
+              {/* Name */}
+              <h3 className="mt-5 text-xl font-bold text-gray-900">
+                {technology.name}
+              </h3>
+
+              {/* Description */}
+              <p className="mt-2 min-h-12 text-sm leading-6 text-gray-500">
+                {technology.description}
+              </p>
+
+              {/* Category + Difficulty */}
+              <div className="mt-4 flex gap-2">
+                <span className="rounded-full bg-violet-50 px-3 py-1 text-xs font-medium text-violet-600">
+                  {technology.category}
+                </span>
+
+                <span className="rounded-full bg-gray-100 px-3 py-1 text-xs font-medium text-gray-600">
+                  {technology.difficulty}
+                </span>
+              </div>
+
+              {/* Rating + Add Button */}
+              <div className="mt-5 flex items-center justify-between border-t border-gray-100 pt-4">
+                <div className="flex items-center gap-1">
+                  <span className="text-yellow-500">★</span>
+
+                  <span className="text-sm font-semibold text-gray-700">
+                    {technology.rating}
+                  </span>
+                </div>
+
+                <button className="rounded-full bg-gradient-to-r from-orange-500 via-pink-500 to-violet-600 px-5 py-2.5 text-sm font-semibold text-white">
+                  Add to Stack
+                </button>
+              </div>
+            </div>
+          ))}
+        </div>
+
+      </div>
+    </section>
     );
 };
 
