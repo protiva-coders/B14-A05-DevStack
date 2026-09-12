@@ -12,7 +12,7 @@ const TechnologyCard = ({
   onAdd,
 }: TechnologyCardProps) => {
   return (
-    <div className="rounded-2xl border border-gray-200 bg-white p-5 shadow-sm">
+    <div className="flex h-full flex-col rounded-2xl border border-gray-200 bg-white p-5 shadow-sm">
 
       {/* Icon + Badge */}
       <div className="flex items-start justify-between">
@@ -39,39 +39,42 @@ const TechnologyCard = ({
         {technology.description}
       </p>
 
-      {/* Category + Difficulty */}
-      <div className="mt-4 flex gap-2">
-        <span className="rounded-full bg-violet-50 px-3 py-1 text-xs font-medium text-violet-600">
-          {technology.category}
-        </span>
+      {/* Category + Difficulty + Rating */}
+      <div className="mt-auto flex flex-wrap items-center justify-between gap-2 pt-5">
 
-        <span className="rounded-full bg-gray-100 px-3 py-1 text-xs font-medium text-gray-600">
-          {technology.difficulty}
-        </span>
-      </div>
+        {/* Category + Difficulty */}
+        <div className="flex flex-wrap gap-2">
+          <span className="rounded-full bg-violet-50 px-3 py-1 text-xs font-medium text-violet-600">
+            {technology.category}
+          </span>
 
-      {/* Rating + Button */}
-      <div className="mt-5 flex items-center justify-between border-t border-gray-100 pt-4">
-        <div className="flex items-center gap-1">
+          <span className="rounded-full bg-gray-100 px-3 py-1 text-xs font-medium text-gray-600">
+            {technology.difficulty}
+          </span>
+        </div>
+
+        {/* Rating */}
+        <div className="flex shrink-0 items-center gap-1">
           <span className="text-yellow-500">★</span>
 
           <span className="text-sm font-semibold text-gray-700">
             {technology.rating}
           </span>
         </div>
-
-        <button
-          onClick={() => onAdd(technology)}
-          disabled={isAdded}
-          className={`rounded-full px-5 py-2.5 text-sm font-semibold text-white ${
-            isAdded
-              ? "cursor-not-allowed bg-gray-400"
-              : "bg-gradient-to-r from-orange-500 via-pink-500 to-violet-600"
-          }`}
-        >
-          {isAdded ? "✓ Added to Stack" : "Add to Stack"}
-        </button>
       </div>
+
+      {/* Button */}
+      <button
+        onClick={() => onAdd(technology)}
+        disabled={isAdded}
+        className={`mt-4 w-full rounded-xl px-5 py-3 text-sm font-semibold text-white ${
+          isAdded
+            ? "cursor-not-allowed bg-gray-400"
+           : "gradient-primary"
+        }`}
+      >
+        {isAdded ? "✓ Added to Stack" : "Add to Stack"}
+      </button>
 
     </div>
   );

@@ -9,13 +9,12 @@ const Hero = () => {
         {/* Left Side */}{" "}
         <div className="flex-1 max-w-2xl">
           {" "}
-          <h1 className="text-4xl font-black leading-tight tracking-tight text-gray-900 sm:text-5xl lg:text-6xl">
+          <h1 className="whitespace-nowrap text-4xl font-black leading-tight tracking-tight text-gray-900 sm:text-5xl lg:text-6xl">
             {" "}
             Build Your Ideal <br />{" "}
-            <span className="bg-gradient-to-r from-orange-500 via-pink-500 to-violet-600 bg-clip-text text-transparent">
-              {" "}
-              Development Stack{" "}
-            </span>{" "}
+           <span className="gradient-text">
+            Development Stack
+          </span>{" "}
           </h1>{" "}
           <p className="mt-6 text-base leading-relaxed text-gray-600 sm:text-lg">
             {" "}
@@ -26,9 +25,8 @@ const Hero = () => {
           {/* Buttons */}{" "}
           <div className="mt-8 flex flex-wrap items-center gap-4">
             {" "}
-            <button className="rounded-full bg-gradient-to-r from-orange-500 via-pink-500 to-violet-600 px-8 py-3.5 font-semibold text-white shadow-md transition-opacity hover:opacity-90">
-              {" "}
-              Explore Technologies{" "}
+            <button className="gradient-primary rounded-full px-8 py-3.5 font-semibold text-white shadow-md transition-opacity hover:opacity-90">
+              Explore Technologies
             </button>{" "}
             <button className="rounded-full border border-gray-300 px-8 py-3.5 font-semibold text-gray-700 transition-colors hover:bg-gray-50">
               {" "}

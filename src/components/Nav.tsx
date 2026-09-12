@@ -2,7 +2,7 @@ import Logo from '../assets/logo-text.png'
 
 const Nav = () => {
     return (
-         <nav className="border-b border-gray-100 bg-white">
+         <nav className="sticky top-0 z-50 border-b border-gray-100 bg-white">
       <div className="mx-auto flex h-14 max-w-6xl items-center justify-between px-6">
 
         {/* Logo */}

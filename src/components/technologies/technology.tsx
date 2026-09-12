@@ -53,7 +53,7 @@ const Technology = ({ technologiesPromise }: TechnologyProps) => {
 
         <div className="grid grid-cols-3 gap-6">
 
-          <div className="col-span-2 grid grid-cols-2 gap-6">
+          <div className="col-span-2 grid grid-cols-3 gap-6">
             {technologies.map((technology) => {
               const isAdded = stack.some(
                 (item) => item.id === technology.id
