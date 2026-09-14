@@ -15,8 +15,8 @@ const TechnologyCard = ({
     <div className="flex h-full flex-col rounded-2xl border border-gray-200 bg-white p-5 shadow-sm">
 
       {/* Icon + Badge */}
-      <div className="flex items-start justify-between">
-        <div className="flex h-14 w-14 items-center justify-center rounded-xl bg-gray-50">
+      <div className="flex items-start justify-between gap-3">
+        <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-xl bg-gray-50">
           <img
             src={technology.icon}
             alt={technology.name}
@@ -24,53 +24,50 @@ const TechnologyCard = ({
           />
         </div>
 
-        <span className="rounded-full bg-orange-50 px-3 py-1 text-xs font-semibold text-orange-600">
+        <span className="shrink-0 rounded-full bg-orange-50 px-3 py-1 text-xs font-semibold text-orange-600">
           {technology.badge}
         </span>
       </div>
 
       {/* Name */}
-      <h3 className="mt-5 text-xl font-bold text-gray-900">
+      <h3 className="mt-5 min-h-7 text-xl font-bold leading-7 text-gray-900">
         {technology.name}
       </h3>
 
       {/* Description */}
-      <p className="mt-2 min-h-12 text-sm leading-6 text-gray-500">
+      <p className="mt-2 min-h-[72px] text-sm leading-6 text-gray-500">
         {technology.description}
       </p>
-
       {/* Category + Difficulty + Rating */}
-      <div className="mt-auto flex flex-wrap items-center justify-between gap-2 pt-5">
+<div className="mt-auto flex items-center justify-between gap-1 pt-4">
 
-        {/* Category + Difficulty */}
-        <div className="flex flex-wrap gap-2">
-          <span className="rounded-full bg-violet-50 px-3 py-1 text-xs font-medium text-violet-600">
-            {technology.category}
-          </span>
+  <div className="flex min-w-0 items-center gap-1">
+    <span className="rounded-full bg-violet-50 px-2 py-1 text-xs font-medium text-violet-600">
+      {technology.category}
+    </span>
 
-          <span className="rounded-full bg-gray-100 px-3 py-1 text-xs font-medium text-gray-600">
-            {technology.difficulty}
-          </span>
-        </div>
+    <span className="rounded-full bg-gray-100 px-2 py-1 text-xs font-medium text-gray-600">
+      {technology.difficulty}
+    </span>
+  </div>
 
-        {/* Rating */}
-        <div className="flex shrink-0 items-center gap-1">
-          <span className="text-yellow-500">★</span>
+  <div className="flex shrink-0 items-center gap-1">
+    <span className="text-yellow-500">★</span>
+    <span className="text-sm font-semibold text-gray-700">
+      {technology.rating}
+    </span>
+  </div>
 
-          <span className="text-sm font-semibold text-gray-700">
-            {technology.rating}
-          </span>
-        </div>
-      </div>
+</div>
 
       {/* Button */}
       <button
         onClick={() => onAdd(technology)}
         disabled={isAdded}
-        className={`mt-4 w-full rounded-xl px-5 py-3 text-sm font-semibold text-white ${
+        className={`mt-4 w-full rounded-xl px-5 py-3 text-sm font-semibold ${
           isAdded
-            ? "cursor-not-allowed bg-gray-400"
-           : "gradient-primary"
+            ? "cursor-not-allowed bg-gray-400 text-white"
+            : "bg-black text-white hover:bg-gray-800"
         }`}
       >
         {isAdded ? "✓ Added to Stack" : "Add to Stack"}
